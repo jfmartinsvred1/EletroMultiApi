@@ -9,7 +9,7 @@ namespace EletroMultiAPI.Models
         public int EquipamentoId { get; set; }
         [Required]
         public int ServicoId { get; set; }
-        public virtual Servico Servico { get; set; }
+        public Servico Servico { get; set; }
         [Required]
         public string Nome { get; set; }
         [Required]

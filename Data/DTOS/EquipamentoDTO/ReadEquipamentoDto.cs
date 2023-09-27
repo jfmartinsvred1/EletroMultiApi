@@ -1,13 +1,12 @@
-﻿using EletroMultiAPI.Models;
+﻿using EletroMultiAPI.Data.DTOS.ServicosDTOS;
+using EletroMultiAPI.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace EletroMultiAPI.Data.DTOS.EquipamentoDTO
 {
     public class ReadEquipamentoDto
     {
-        [Required]
-        public int ServicoId { get; set; }
-        public virtual Servico Servico { get; set; }
+        public int EquipamentoId { get; set; }
         [Required]
         public string Nome { get; set; }
         [Required]

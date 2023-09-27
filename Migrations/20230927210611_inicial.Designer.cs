@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EletroMultiAPI.Migrations
 {
     [DbContext(typeof(EletroMultiContext))]
-    [Migration("20230927185415_create")]
-    partial class create
+    [Migration("20230927210611_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

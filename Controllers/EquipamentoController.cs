@@ -3,6 +3,7 @@ using EletroMultiAPI.Data;
 using EletroMultiAPI.Data.DTOS.EquipamentoDTO;
 using EletroMultiAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EletroMultiAPI.Controllers
 {
@@ -31,12 +32,12 @@ namespace EletroMultiAPI.Controllers
         [HttpGet]
         public IEnumerable<ReadEquipamentoDto> RecuperarEquipamento([FromQuery] int skip = 0, [FromQuery] int take = 10)
         {
-            return _mapper.Map<List<ReadEquipamentoDto>>(_context.Equipamentos.Skip(skip).Take(take));
+            return _mapper.Map<List<ReadEquipamentoDto>>(_context.Equipamentos.Include(s=>s.Servico).Skip(skip).Take(take));
         }
         [HttpGet("{id}")]
         public IActionResult BuscaEquipamentoPorId(int id)
         {
-            var equipamento = _context.Equipamentos.FirstOrDefault(equipamento => equipamento.EquipamentoId == id);
+            var equipamento = _context.Equipamentos.Include(o=>o.Servico).FirstOrDefault(equipamento => equipamento.EquipamentoId == id);
             if (equipamento == null) return NotFound($"O  com id:{id} não existe.");
             var equipamentoDto = _mapper.Map<ReadEquipamentoDto>(equipamento);
             return Ok(equipamentoDto);
