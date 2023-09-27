@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\EletroMultiAPI.props" />
+</Project>
