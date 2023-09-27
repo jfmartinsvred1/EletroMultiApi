@@ -1,18 +1,21 @@
 ﻿using EletroMultiAPI.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace EletroMultiAPI.Data.DTOS.EquipamentoDTOS
+namespace EletroMultiAPI.Data.DTOS.EquipamentoDTO
 {
     public class CreateEquipamentoDto
     {
         [Required]
         public int ServicoId { get; set; }
         [Required]
-        public int MarcaId { get; set; }
+        public string Nome { get; set; }
         [Required]
         public string Modelo { get; set; }
-        public int NumSerie { get; set; }
-        public int NumPatrimonio { get; set; }
+        [Required]
+        public string Marca { get; set; }
+        [Required]
+        public string NumSerie { get; set; }
+        [Required]
         public bool Garantia { get; set; }
     }
 }

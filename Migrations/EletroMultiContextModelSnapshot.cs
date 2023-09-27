@@ -46,44 +46,30 @@ namespace EletroMultiAPI.Migrations
                     b.Property<bool>("Garantia")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("MarcaId")
-                        .HasColumnType("int");
+                    b.Property<string>("Marca")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("NumPatrimonio")
-                        .HasColumnType("int");
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
-                    b.Property<int>("NumSerie")
-                        .HasColumnType("int");
+                    b.Property<string>("NumSerie")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("ServicoId")
                         .HasColumnType("int");
 
                     b.HasKey("EquipamentoId");
 
-                    b.HasIndex("MarcaId");
-
                     b.HasIndex("ServicoId");
 
                     b.ToTable("Equipamentos");
-                });
-
-            modelBuilder.Entity("EletroMultiAPI.Models.Marca", b =>
-                {
-                    b.Property<int>("MarcaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("MarcaId");
-
-                    b.ToTable("Marcas");
                 });
 
             modelBuilder.Entity("EletroMultiAPI.Models.Servico", b =>
@@ -107,19 +93,11 @@ namespace EletroMultiAPI.Migrations
 
             modelBuilder.Entity("EletroMultiAPI.Models.Equipamento", b =>
                 {
-                    b.HasOne("EletroMultiAPI.Models.Marca", "Marca")
-                        .WithMany("Equipamentos")
-                        .HasForeignKey("MarcaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("EletroMultiAPI.Models.Servico", "Servico")
                         .WithMany("Equipamentos")
                         .HasForeignKey("ServicoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Marca");
 
                     b.Navigation("Servico");
                 });
@@ -138,11 +116,6 @@ namespace EletroMultiAPI.Migrations
             modelBuilder.Entity("EletroMultiAPI.Models.Cliente", b =>
                 {
                     b.Navigation("Servicos");
-                });
-
-            modelBuilder.Entity("EletroMultiAPI.Models.Marca", b =>
-                {
-                    b.Navigation("Equipamentos");
                 });
 
             modelBuilder.Entity("EletroMultiAPI.Models.Servico", b =>

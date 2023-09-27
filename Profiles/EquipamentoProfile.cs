@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EletroMultiAPI.Data.DTOS.EquipamentoDTOS;
+using EletroMultiAPI.Data.DTOS.EquipamentoDTO;
 using EletroMultiAPI.Models;
 
 namespace EletroMultiAPI.Profiles

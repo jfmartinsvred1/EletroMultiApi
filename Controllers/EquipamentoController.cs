@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using EletroMultiAPI.Data;
-using EletroMultiAPI.Data.DTOS.EquipamentoDTOS;
+using EletroMultiAPI.Data.DTOS.EquipamentoDTO;
 using EletroMultiAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +12,12 @@ namespace EletroMultiAPI.Controllers
     {
         private EletroMultiContext _context;
         private IMapper _mapper;
+
+        public EquipamentoController(EletroMultiContext context, IMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
+        }
 
         [HttpPost]
         public IActionResult AdicionarEquipamento([FromBody] CreateEquipamentoDto equipamentoDto)
@@ -31,7 +37,7 @@ namespace EletroMultiAPI.Controllers
         public IActionResult BuscaEquipamentoPorId(int id)
         {
             var equipamento = _context.Equipamentos.FirstOrDefault(equipamento => equipamento.EquipamentoId == id);
-            if (equipamento == null) return NotFound($"O Cliente com id:{id} não existe.");
+            if (equipamento == null) return NotFound($"O  com id:{id} não existe.");
             var equipamentoDto = _mapper.Map<ReadEquipamentoDto>(equipamento);
             return Ok(equipamentoDto);
         }

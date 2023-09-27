@@ -10,8 +10,8 @@ namespace EletroMultiAPI.Data
             
         }
         public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Marca> Marcas { get; set; }
         public DbSet<Servico> Servicos { get; set; }
         public DbSet<Equipamento> Equipamentos { get; set; }
+
     }
 }
