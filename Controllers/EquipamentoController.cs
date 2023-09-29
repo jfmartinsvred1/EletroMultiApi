@@ -38,7 +38,7 @@ namespace EletroMultiAPI.Controllers
         public IActionResult BuscaEquipamentoPorId(int id)
         {
             var equipamento = _context.Equipamentos.Include(o=>o.Servico).FirstOrDefault(equipamento => equipamento.EquipamentoId == id);
-            if (equipamento == null) return NotFound($"O  com id:{id} não existe.");
+            if (equipamento == null) return NotFound($"O Equipamento com id:{id} não existe.");
             var equipamentoDto = _mapper.Map<ReadEquipamentoDto>(equipamento);
             return Ok(equipamentoDto);
         }

@@ -45,3 +45,7 @@ C:\Users\Joao\Desktop\Projetos\EletroMultiAPI\bin\Debug\net6.0\Microsoft.AspNetC
 C:\Users\Joao\Desktop\Projetos\EletroMultiAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Joao\Desktop\Projetos\EletroMultiAPI\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\Joao\Desktop\Projetos\EletroMultiAPI\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\Joao\Desktop\Projetos\EletroMultiAPI\bin\Debug\net6.0\System.Web.Cors.dll
+C:\Users\Joao\Desktop\Projetos\EletroMultiAPI\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\Joao\Desktop\Projetos\EletroMultiAPI\bin\Debug\net6.0\System.Web.Http.dll
+C:\Users\Joao\Desktop\Projetos\EletroMultiAPI\bin\Debug\net6.0\System.Web.Http.Cors.dll

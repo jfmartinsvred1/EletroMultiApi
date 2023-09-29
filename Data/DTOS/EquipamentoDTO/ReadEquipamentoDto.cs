@@ -7,6 +7,7 @@ namespace EletroMultiAPI.Data.DTOS.EquipamentoDTO
     public class ReadEquipamentoDto
     {
         public int EquipamentoId { get; set; }
+        public int ServicoId { get; set; }
         [Required]
         public string Nome { get; set; }
         [Required]

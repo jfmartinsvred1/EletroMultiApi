@@ -1,7 +1,6 @@
 ﻿using EletroMultiAPI.Data.DTOS.ClienteDTOS;
 using EletroMultiAPI.Data.DTOS.EquipamentoDTO;
-using EletroMultiAPI.Models;
-using System.ComponentModel.DataAnnotations;
+using EletroMultiAPI.Enums;
 
 namespace EletroMultiAPI.Data.DTOS.ServicosDTOS
 {
@@ -10,5 +9,6 @@ namespace EletroMultiAPI.Data.DTOS.ServicosDTOS
         public virtual ReadClienteDto Cliente { get; set; }
         public int NumeroOs { get; set; }
         public ICollection<ReadEquipamentoDto> Equipamentos { get; set; }
+        public Status Status { get; set; } 
     }
 }

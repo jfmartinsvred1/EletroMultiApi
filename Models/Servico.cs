@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using EletroMultiAPI.Enums;
 
 namespace EletroMultiAPI.Models
 {
@@ -9,6 +10,7 @@ namespace EletroMultiAPI.Models
         public int ServicoId { get; set; }
         [Required]
         public int ClienteId { get; set; }
+        public Status Status { get; set; } = (Status)1;
         [Required]
         public virtual Cliente Cliente { get; set; }
         public int NumeroOs { get; set; }

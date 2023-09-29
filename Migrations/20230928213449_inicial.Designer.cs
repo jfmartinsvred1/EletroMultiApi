@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EletroMultiAPI.Migrations
 {
     [DbContext(typeof(EletroMultiContext))]
-    [Migration("20230927210611_inicial")]
+    [Migration("20230928213449_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,6 +84,9 @@ namespace EletroMultiAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("NumeroOs")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("ServicoId");

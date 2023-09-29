@@ -36,6 +36,7 @@ namespace EletroMultiAPI.Migrations
                     ServicoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     NumeroOs = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
