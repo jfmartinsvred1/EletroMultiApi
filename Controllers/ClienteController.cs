@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using EletroMultiAPI.Data;
 using EletroMultiAPI.Data.DTOS.ClienteDTOS;
+using EletroMultiAPI.Data.DTOS.ServicosDTOS;
 using EletroMultiAPI.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EletroMultiAPI.Controllers
 {
@@ -28,9 +30,9 @@ namespace EletroMultiAPI.Controllers
             return CreatedAtAction(nameof(BuscaClientePorId), new { id = cliente.ClienteId }, cliente);
         }
         [HttpGet]
-        public IEnumerable<ReadClienteDto> RecuperarClientes([FromQuery] int skip = 0, [FromQuery] int take = 10)
+        public IEnumerable<ReadClienteDto> RecuperarClientes()
         {
-            return _mapper.Map<List<ReadClienteDto>>(_context.Clientes.Skip(skip).Take(take));
+            return _mapper.Map<List<ReadClienteDto>>(_context.Clientes);
         }
         [HttpGet("{id}")]
         public IActionResult BuscaClientePorId(int id)
@@ -73,6 +75,11 @@ namespace EletroMultiAPI.Controllers
             _context.Clientes.Remove(cliente);
             _context.SaveChanges();
             return NoContent();
+        }
+        [HttpGet("/Cliente/servicos/{id}")]
+        public IEnumerable<ReadServicoDto> RecuperarServicosPorCliente(int id)
+        {        
+            return _mapper.Map<List<ReadServicoDto>>(_context.Servicos.Include(p=>p.Cliente).Include(p=>p.Equipamentos).Where(i=>i.ClienteId==id));
         }
     }
 }

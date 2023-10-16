@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EletroMultiAPI.Data;
+using EletroMultiAPI.Data.DTOS.ClienteDTOS;
 using EletroMultiAPI.Data.DTOS.ServicosDTOS;
 using EletroMultiAPI.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -29,9 +30,9 @@ namespace EletroMultiAPI.Controllers
 
         }
         [HttpGet]
-        public IEnumerable<ReadServicoDto> RecuperarServicos([FromQuery] int skip = 0, [FromQuery] int take = 10)
+        public IEnumerable<ReadServicoDto> RecuperarServicos()
         {
-            return _mapper.Map<List<ReadServicoDto>>(_context.Servicos.Include(c=>c.Equipamentos).Include(c=>c.Cliente).Skip(skip).Take(take));
+            return _mapper.Map<List<ReadServicoDto>>(_context.Servicos.Include(c=>c.Equipamentos).Include(c=>c.Cliente));
         }
         [HttpGet("{id}")]
         public IActionResult BuscaServicoPorId(int id)
@@ -41,5 +42,25 @@ namespace EletroMultiAPI.Controllers
             var servicoDto = _mapper.Map<ReadServicoDto>(servico);
             return Ok(servicoDto);
         }
+
+        [HttpPut("{id}")]
+        public IActionResult AtualizarServico(int id, [FromBody] UpdateServicoDto servicoDto)
+        {
+            var servico = _context.Servicos.FirstOrDefault(Servico => Servico.ServicoId == id);
+            if (servico == null) return NotFound($"O Servico com id: {id} não existe.");
+            _mapper.Map(servicoDto, servico);
+            _context.SaveChanges();
+            return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public IActionResult DeletaServico(int id)
+        {
+            var servico = _context.Servicos.FirstOrDefault(s => s.ServicoId == id);
+            if (servico == null) return NotFound($"O Cliente com id:{id} não existe.");
+            _context.Servicos.Remove(servico);
+            _context.SaveChanges();
+            return NoContent();
+        }
+
     }
 }

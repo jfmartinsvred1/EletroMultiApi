@@ -5,8 +5,15 @@ namespace EletroMultiAPI.Data.DTOS.ClienteDTOS
 {
     public class ReadClienteDto
     {
+        public int ClienteId { get; set; }
         public string Nome { get; set; }
-        public string Contato { get; set; }
+
+        [Required]
+        public string Cpf { get; set; }
+        [Required]
+        public string Numero { get; set; }
+        [Required]
+        public string Email { get; set; }
 
     }
 }

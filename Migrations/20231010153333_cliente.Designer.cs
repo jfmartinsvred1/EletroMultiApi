@@ -2,6 +2,7 @@
 using EletroMultiAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EletroMultiAPI.Migrations
 {
     [DbContext(typeof(EletroMultiContext))]
-    partial class EletroMultiContextModelSnapshot : ModelSnapshot
+    [Migration("20231010153333_cliente")]
+    partial class cliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,6 +89,9 @@ namespace EletroMultiAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumeroOs")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")

@@ -8,7 +8,5 @@ namespace EletroMultiAPI.Data.DTOS.ServicosDTOS
     {
         [Required]
         public int ClienteId { get; set; }
-        [Required]
-        public int NumeroOs { get; set; }
     }
 }
