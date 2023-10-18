@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EletroMultiAPI.Migrations
 {
-    public partial class inicial : Migration
+    public partial class status : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,12 +20,31 @@ namespace EletroMultiAPI.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Contato = table.Column<string>(type: "longtext", nullable: false)
+                    Cpf = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Numero = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Email = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clientes", x => x.ClienteId);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Status",
+                columns: table => new
+                {
+                    StatusId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    StatusTipo = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Status", x => x.StatusId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -36,8 +55,7 @@ namespace EletroMultiAPI.Migrations
                     ServicoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    NumeroOs = table.Column<int>(type: "int", nullable: false)
+                    StatusId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -47,6 +65,12 @@ namespace EletroMultiAPI.Migrations
                         column: x => x.ClienteId,
                         principalTable: "Clientes",
                         principalColumn: "ClienteId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Servicos_Status_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Status",
+                        principalColumn: "StatusId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -89,6 +113,11 @@ namespace EletroMultiAPI.Migrations
                 name: "IX_Servicos_ClienteId",
                 table: "Servicos",
                 column: "ClienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Servicos_StatusId",
+                table: "Servicos",
+                column: "StatusId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -101,6 +130,9 @@ namespace EletroMultiAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Clientes");
+
+            migrationBuilder.DropTable(
+                name: "Status");
         }
     }
 }

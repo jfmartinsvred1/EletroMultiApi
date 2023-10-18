@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EletroMultiAPI.Migrations
 {
     [DbContext(typeof(EletroMultiContext))]
-    [Migration("20230928213449_inicial")]
-    partial class inicial
+    [Migration("20231018022748_status")]
+    partial class status
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,11 +26,19 @@ namespace EletroMultiAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Contato")
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Numero")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -83,17 +91,31 @@ namespace EletroMultiAPI.Migrations
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumeroOs")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
+                    b.Property<int>("StatusId")
                         .HasColumnType("int");
 
                     b.HasKey("ServicoId");
 
                     b.HasIndex("ClienteId");
 
+                    b.HasIndex("StatusId");
+
                     b.ToTable("Servicos");
+                });
+
+            modelBuilder.Entity("EletroMultiAPI.Models.Status", b =>
+                {
+                    b.Property<int>("StatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("StatusTipo")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("StatusId");
+
+                    b.ToTable("Status");
                 });
 
             modelBuilder.Entity("EletroMultiAPI.Models.Equipamento", b =>
@@ -115,7 +137,15 @@ namespace EletroMultiAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("EletroMultiAPI.Models.Status", "Status")
+                        .WithMany("Servicos")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Cliente");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("EletroMultiAPI.Models.Cliente", b =>
@@ -126,6 +156,11 @@ namespace EletroMultiAPI.Migrations
             modelBuilder.Entity("EletroMultiAPI.Models.Servico", b =>
                 {
                     b.Navigation("Equipamentos");
+                });
+
+            modelBuilder.Entity("EletroMultiAPI.Models.Status", b =>
+                {
+                    b.Navigation("Servicos");
                 });
 #pragma warning restore 612, 618
         }

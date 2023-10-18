@@ -37,7 +37,7 @@ namespace EletroMultiAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult BuscaServicoPorId(int id)
         {
-            var servico = _context.Servicos.Include(e=>e.Equipamentos).FirstOrDefault(servico => servico.ServicoId == id);
+            var servico = _context.Servicos.Include(e=>e.Equipamentos).Include(e=>e.Status.StatusTipo).FirstOrDefault(servico => servico.ServicoId == id);
             if (servico == null) return NotFound($"O Servico com id:{id} não existe.");
             var servicoDto = _mapper.Map<ReadServicoDto>(servico);
             return Ok(servicoDto);

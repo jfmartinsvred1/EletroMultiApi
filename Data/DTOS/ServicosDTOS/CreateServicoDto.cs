@@ -1,4 +1,4 @@
-﻿using EletroMultiAPI.Enums;
+﻿
 using EletroMultiAPI.Models;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,5 +8,6 @@ namespace EletroMultiAPI.Data.DTOS.ServicosDTOS
     {
         [Required]
         public int ClienteId { get; set; }
+        public int StatusId { get; set; }
     }
 }
