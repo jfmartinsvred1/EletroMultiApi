@@ -10,7 +10,12 @@ namespace EletroMultiAPI.Models
         [Required]
         public string Nome { get; set; }
         [Required]
-        public string Cpf { get; set; }
+        public string DocumentoId { get; set; }
+        [Required]
+        public virtual Documento Documento { get; set; }
+        [Required]
+        [MaxLength(18)]
+        public string NumDocumento { get; set; }
         [Required]
         public string Numero { get; set; }
         [Required]

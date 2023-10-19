@@ -30,9 +30,9 @@ namespace EletroMultiAPI.Controllers
 
         }
         [HttpGet]
-        public IEnumerable<ReadServicoDto> RecuperarServicos()
+        public IEnumerable<ReadServicoDto> RecuperarServicos([FromQuery] int skip,[FromQuery]int take)
         {
-            return _mapper.Map<List<ReadServicoDto>>(_context.Servicos.Include(c=>c.Equipamentos).Include(c=>c.Cliente));
+            return _mapper.Map<List<ReadServicoDto>>(_context.Servicos.Include(c=>c.Equipamentos).Include(c=>c.Cliente).Skip(skip).Take(take));
         }
         [HttpGet("{id}")]
         public IActionResult BuscaServicoPorId(int id)
