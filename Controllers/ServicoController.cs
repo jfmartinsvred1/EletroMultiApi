@@ -30,14 +30,14 @@ namespace EletroMultiAPI.Controllers
 
         }
         [HttpGet]
-        public IEnumerable<ReadServicoDto> RecuperarServicos([FromQuery] int skip,[FromQuery]int take)
+        public IEnumerable<ReadServicoDto> RecuperarServicos([FromQuery] int skip=0,[FromQuery]int take = 10)
         {
-            return _mapper.Map<List<ReadServicoDto>>(_context.Servicos.Include(c=>c.Equipamentos).Include(c=>c.Cliente).Skip(skip).Take(take));
+            return _mapper.Map<List<ReadServicoDto>>(_context.Servicos.Include(c => c.Equipamentos).Include(p=>p.Status).Include(c => c.Cliente).Skip(skip).Take(take)); ; ;
         }
         [HttpGet("{id}")]
         public IActionResult BuscaServicoPorId(int id)
         {
-            var servico = _context.Servicos.Include(e=>e.Equipamentos).Include(e=>e.Status.StatusTipo).FirstOrDefault(servico => servico.ServicoId == id);
+            var servico = _context.Servicos.Include(e=>e.Equipamentos).Include(p=>p.Cliente).FirstOrDefault(servico => servico.ServicoId == id);
             if (servico == null) return NotFound($"O Servico com id:{id} não existe.");
             var servicoDto = _mapper.Map<ReadServicoDto>(servico);
             return Ok(servicoDto);

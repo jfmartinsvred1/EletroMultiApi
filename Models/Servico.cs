@@ -17,5 +17,6 @@ namespace EletroMultiAPI.Models
         [Required]
         public virtual Cliente Cliente { get; set; }
         public ICollection<Equipamento> Equipamentos { get; set; }
+        public DateTime DataEntrada { get; set; }
     }
 }
